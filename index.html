@@ -141,3 +141,62 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio de Promoções</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #countdown {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="countdown"></div>
+
+    <script>
+        // Data final da promoção (ano, mês (0-11), dia, hora, minuto, segundo)
+        var endDate = new Date(2023, 0, 1, 12, 0, 0);
+
+        function updateCountdown() {
+            var now = new Date();
+            var timeDifference = endDate - now;
+
+            if (timeDifference <= 0) {
+                document.getElementById('countdown').innerHTML = 'Promoção Encerrada!';
+            } else {
+                var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                document.getElementById('countdown').innerHTML = 'Tempo Restante: ' +
+                    days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+            }
+        }
+
+        // Atualizar a contagem regressiva a cada segundo
+        setInterval(updateCountdown, 1000);
+
+        // Atualizar imediatamente ao carregar a página
+        updateCountdown();
+    </script>
+
+</body>
+</html>
